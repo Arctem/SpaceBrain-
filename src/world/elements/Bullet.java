@@ -1,9 +1,12 @@
 package world.elements;
 
+import java.awt.Graphics;
 import java.awt.Polygon;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 import world.elements.Ship.Ship;
+import world.elements.libs.ImageLib;
 import world.elements.libs.ImageType;
 import world.elements.physics.Location;
 import world.elements.physics.Vector;
@@ -78,6 +81,12 @@ public class Bullet extends SpaceThing{
 		super.physics(physList);
 		
 		lifespan--;
+	}
+	
+	@Override
+	public void paint(Graphics g, double originX, double originY) {
+		BufferedImage sprite = ImageLib.getImage(spriteType);
+		g.drawImage(sprite, (int) (location.getxLocal() - originX), (int) (location.getyLocal() - originY), null);
 	}
 
 	@Override

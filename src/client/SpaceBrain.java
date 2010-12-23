@@ -1,6 +1,6 @@
 package client;
 
-import java.awt.Graphics;
+import java.awt.Color;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.net.Socket;
@@ -22,6 +22,7 @@ public class SpaceBrain extends JFrame {
 	private KeyMap keyMap;
 	private BufferStrategy buffer;
 	private ClientPanel cf;
+	private Color bgColor = Color.green;
 
 	public static void main(String[] args) {
 		ImageLib.init();
@@ -35,6 +36,7 @@ public class SpaceBrain extends JFrame {
 
 	public SpaceBrain() {
 		super();
+		this.setBackground(bgColor);
 		this.setResizable(false);
 		this.setVisible(true);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,7 +79,6 @@ public class SpaceBrain extends JFrame {
 			camera.update();
 			cf.drawWorld(camera);
 			cf.drawHUD(camera);
-//			cf.repaint();
 			if (!buffer.contentsLost())
 				buffer.show();
 		}

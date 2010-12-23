@@ -19,7 +19,7 @@ public class GeomLib {
 		// TODO: Since we're going to be importing many hitboxes later, this
 		// should be more streamlined.
 		InputStream buffer = new BufferedInputStream(new FileInputStream(
-				"bin/world/elements/libs/ship.brn"));
+				"data/ship.brn"));
 		ObjectInput in = new ObjectInputStream(buffer);
 		SHIP_1 = (Polygon) in.readObject();
 	}

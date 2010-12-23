@@ -34,11 +34,11 @@ public class ImageLib {
 	public static void init() {
 		System.out.println("Loading images...");
 		try {
-			SHIP1 = ImageIO.read(new File("bin/world/elements/libs/ship.png"));
-			SHIP2 = ImageIO.read(new File("bin/world/elements/libs/ship2.png"));
-			BULLET1 = ImageIO.read(new File("bin/world/elements/libs/bullet01.png"));
-			ITEM1 = ImageIO.read(new File("bin/world/elements/libs/item01.png"));
-			ITEM2 = ImageIO.read(new File("bin/world/elements/libs/item02.png"));
+			SHIP1 = ImageIO.read(new File("data/sprites/ship.png"));
+			SHIP2 = ImageIO.read(new File("data/sprites/ship2.png"));
+			BULLET1 = ImageIO.read(new File("data/sprites/bullet02.png"));
+			ITEM1 = ImageIO.read(new File("data/sprites/item01.png"));
+			ITEM2 = ImageIO.read(new File("data/sprites/item02.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Oh jeepers. Error loading images.");
