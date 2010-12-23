@@ -6,9 +6,11 @@ import java.awt.Graphics;
 
 import javax.swing.JPanel;
 
+import world.elements.Item;
+
 public class InventoryPanel extends JPanel {
 	/**
-	 * Searial ID
+	 * Serial ID
 	 */
 	private static final long serialVersionUID = 1L;
 	private Camera camera;
@@ -42,6 +44,14 @@ public class InventoryPanel extends JPanel {
 		g.fillRect(80, 190, (int)(camera.getPlayer().getShip().getInventory().getSpeed()*30), 10);
 		g.drawString("Sheilds:", 20, 220);
 		g.fillRect(80, 210, (int)(camera.getPlayer().getShip().getInventory().getShields()*30), 10);
+		
+		for(int i=0; i<5; i++){
+			g.drawRect(40, 230+i*60, 50, 50);
+			g.drawRect(100, 230+i*60, 50, 50);
+		}
+		for(int i=0; i<camera.getPlayer().getShip().getInventory().getItemList().size();i++){
+			g.drawImage(camera.getPlayer().getShip().getInventory().getItemList().get(i).getSprite(), (i%2 == 0 ? 40:100),230+(i/2)*60,30,30,null);
+		}
 	}
 	
 	
