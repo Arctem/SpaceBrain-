@@ -13,6 +13,7 @@ public class ImageLib {
 	private static BufferedImage BULLET1;
 	private static BufferedImage ITEM1;
 	private static BufferedImage ITEM2;
+	private static BufferedImage ITEM3;
 
 	public static BufferedImage getImage(ImageType i) {
 		switch (i) {
@@ -26,6 +27,8 @@ public class ImageLib {
 			return ITEM1;
 		case ITEM_2:
 			return ITEM2;
+		case ITEM_3:
+			return ITEM3;
 		default:
 			return null;
 		}
@@ -39,6 +42,7 @@ public class ImageLib {
 			BULLET1 = ImageIO.read(new File("data/sprites/bullet02.png"));
 			ITEM1 = ImageIO.read(new File("data/sprites/item01.png"));
 			ITEM2 = ImageIO.read(new File("data/sprites/item02.png"));
+			ITEM3 = ImageIO.read(new File("data/sprites/item03.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 			System.out.println("Oh jeepers. Error loading images.");

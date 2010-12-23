@@ -77,6 +77,9 @@ public class World implements Serializable {
 		shipList.add(new Ship(new Location(300, 400)));
 		shipList.add(new Ship(new Location(500, 2000)));
 		otherList.add(new Item(new Location(400,400),ItemType.SPEED,1));
+		otherList.add(new Item(new Location(450, 400), ItemType.SPEED, 5));
+		otherList.add(new Item(new Location(500, 400), ItemType.SPEED, 3));
+		otherList.add(new Item(new Location(450, 450), ItemType.SHEILDS, 3));
 	}
 	
 	/**
