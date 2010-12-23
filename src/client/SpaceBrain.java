@@ -48,6 +48,7 @@ public class SpaceBrain extends JFrame {
 		this.add(cf);
 		
 		this.pack();
+		this.setSize(1000,800);
 		this.addKeyListener(keyMap);
 		
 		camera = new Camera();
