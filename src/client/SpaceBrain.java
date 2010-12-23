@@ -1,6 +1,7 @@
 package client;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.image.BufferStrategy;
 import java.io.IOException;
 import java.net.Socket;
@@ -21,7 +22,8 @@ public class SpaceBrain extends JFrame {
 	private CommHandler comms;
 	private KeyMap keyMap;
 	private BufferStrategy buffer;
-	private ClientPanel cf;
+	private ClientPanel cp;
+	private InventoryPanel ip;
 	private Color bgColor = Color.green;
 
 	public static void main(String[] args) {
@@ -43,15 +45,8 @@ public class SpaceBrain extends JFrame {
 		this.createBufferStrategy(2);
 		keyMap = new KeyMap();
 		
-		buffer = this.getBufferStrategy();
-		cf = new ClientPanel(buffer);
-		this.add(cf);
-		
-		this.pack();
-		this.setSize(1000,800);
-		this.addKeyListener(keyMap);
-		
 		camera = new Camera();
+		buffer = this.getBufferStrategy();
 		try {
 			comms = new CommHandler(new Socket("127.0.0.1", 6661));
 		} catch (IOException e) {
@@ -64,6 +59,17 @@ public class SpaceBrain extends JFrame {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
+		
+		cp = new ClientPanel(camera);
+		ip = new InventoryPanel(camera);
+		this.setLayout(new FlowLayout());
+		this.add(cp);
+		this.add(ip);
+		this.pack();
+//		this.setSize(1000,800);
+		this.addKeyListener(keyMap);
+		
+
 	}
 
 	public void run() throws InterruptedException {
@@ -76,12 +82,9 @@ public class SpaceBrain extends JFrame {
 			} catch (ClassNotFoundException e) {
 				e.printStackTrace();
 			}
-			cf.clrScreen();
 			camera.update();
-			cf.drawWorld(camera);
-			cf.drawHUD(camera);
-			if (!buffer.contentsLost())
-				buffer.show();
+			cp.repaint();
+			ip.repaint();
 		}
 	}
 	

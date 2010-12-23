@@ -77,4 +77,8 @@ public class Weapon extends SpaceThing {
 	}
 	@Override
 	public void die() {}
+	
+	public WeaponType getFirepattern(){
+		return firepattern;
+	}
 }

@@ -162,6 +162,10 @@ public class Ship extends SpaceThing {
 	public void pickupWeapon(Weapon w){
 		inventory.pickupWeapon(w);
 	}
+	
+	public Inventory getInventory(){
+		return inventory;
+	}
 
 	/**
 	 * Checks if the ship has any shields left.

@@ -18,26 +18,32 @@ import comm.CommHandler;
 public class ClientPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	private BufferStrategy buffer;
 	private final Color bgColor = Color.black;
+	private Camera camera;
 
-	public ClientPanel(BufferStrategy buff) {
+	public ClientPanel(Camera camera) {
+		super(true);
 		this.setPreferredSize(new Dimension(1000, 800));
 		this.setBackground(bgColor);
-		buffer = buff;
+		this.camera = camera;
 	}
-	public void clrScreen() {
-		Graphics g = buffer.getDrawGraphics();
+	
+	public void paint(Graphics g){
+		clrScreen(g);
+		drawWorld(g);
+//		drawHUD(g);
+	}
+	
+	public void clrScreen(Graphics g) {
 		g.setColor(bgColor);
-		g.fillRect(getX(), getY(), getWidth(), getHeight() + 50);
+		g.fillRect(0,0,1000,800);
 	}
 	
-	public void drawWorld(Camera camera){
-		camera.paint(buffer.getDrawGraphics());
+	public void drawWorld(Graphics g){
+		camera.paint(g);
 	}
 	
-	public void drawHUD(Camera camera) {
-		Graphics g = buffer.getDrawGraphics();
+	public void drawHUD(Graphics g) {
 		g.setColor(Color.white);
 		g.drawString("Player coords: " + camera.getPlayer().getX() + ", "
 				+ camera.getPlayer().getY(), 10, 40);

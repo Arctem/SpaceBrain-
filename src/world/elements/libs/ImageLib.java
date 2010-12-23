@@ -36,7 +36,7 @@ public class ImageLib {
 		try {
 			SHIP1 = ImageIO.read(new File("data/sprites/ship.png"));
 			SHIP2 = ImageIO.read(new File("data/sprites/ship2.png"));
-			BULLET1 = ImageIO.read(new File("data/sprites/bullet02.png"));
+			BULLET1 = ImageIO.read(new File("data/sprites/bullet01.png"));
 			ITEM1 = ImageIO.read(new File("data/sprites/item01.png"));
 			ITEM2 = ImageIO.read(new File("data/sprites/item02.png"));
 		} catch (IOException e) {
