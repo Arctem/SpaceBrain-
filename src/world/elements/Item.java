@@ -1,8 +1,13 @@
 package world.elements;
 
+import java.awt.Color;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Polygon;
+import java.awt.image.BufferedImage;
 
 import world.elements.Ship.Ship;
+import world.elements.libs.ImageLib;
 import world.elements.libs.ImageType;
 import world.elements.physics.Location;
 
@@ -18,11 +23,39 @@ public class Item extends SpaceThing {
 		this.location = location;
 		this.type = type;
 		this.power = power;
-		this.spriteType = ImageType.ITEM_1;		//EVENTUALLY THIS SHOULD BE BASED ON TYPE/RANDOM
 		pickedUp = false;
 		centerX = centerY = 5;
+		setSpriteType();
 		compile();
 	}
+	
+	private void setSpriteType() {
+			if(power < 3) {
+				this.spriteType = ImageType.ITEM_1;
+			}
+			else if(power < 5) {
+				this.spriteType = ImageType.ITEM_3;
+			}
+			else
+				this.spriteType = ImageType.ITEM_2;
+	}
+	
+	@Override
+	public void paint(Graphics g, double originX, double originY) {
+		BufferedImage sprite = ImageLib.getImage(spriteType);
+		
+		/* if(type == ItemType.SHEILDS) {
+			BufferedImage tintImg = new BufferedImage(sprite.getWidth(), sprite.getHeight(), BufferedImage.TRANSLUCENT);
+			Graphics2D g2d = (Graphics2D) tintImg.getGraphics();
+			Color tintCol = new Color(255, 0, 0, 255);
+			g2d.setXORMode(tintCol);
+			g2d.drawImage(sprite, null, 0, 0);
+			sprite = tintImg;
+		} */
+		
+		g.drawImage(sprite, (int) (location.getxLocal() - originX), (int) (location.getyLocal() - originY), null);
+	}
+	
 	@Override
 	//THIS IS THE BULLET HITBOX@@@!
 	public void compile() {
