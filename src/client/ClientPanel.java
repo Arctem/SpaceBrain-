@@ -18,42 +18,26 @@ import comm.CommHandler;
 public class ClientPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 
-	private Camera camera;
-
-	private CommHandler comms;
-
-	private KeyMap keyMap;
-
 	private BufferStrategy buffer;
 	private final Color bgColor = Color.black;
 
 	public ClientPanel(BufferStrategy buff) {
-		camera = new Camera(null);
-
-		try {
-			comms = new CommHandler(new Socket("127.0.0.1", 6661));
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		try {
-			updateWorld();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		keyMap = new KeyMap();
-
 		this.setPreferredSize(new Dimension(1000, 800));
+		this.setBackground(bgColor);
 		buffer = buff;
 	}
-
-	public void clrScreen(Graphics g) {
+	public void clrScreen() {
+		Graphics g = buffer.getDrawGraphics();
 		g.setColor(bgColor);
 		g.fillRect(getX(), getY(), getWidth(), getHeight() + 50);
 	}
-
-	public void drawHUD(Graphics g) {
+	
+	public void drawWorld(Camera camera){
+		camera.paint(buffer.getDrawGraphics());
+	}
+	
+	public void drawHUD(Camera camera) {
+		Graphics g = buffer.getDrawGraphics();
 		g.setColor(Color.white);
 		g.drawString("Player coords: " + camera.getPlayer().getX() + ", "
 				+ camera.getPlayer().getY(), 10, 40);
@@ -70,71 +54,4 @@ public class ClientPanel extends JPanel {
 			g.drawString("IT'S BRAINSWAPPIN' TIME!", 10, 810);
 		}
 	}
-
-	public KeyMap getKeyMap() {
-		return keyMap;
-	}
-
-	public void run() throws InterruptedException {
-		while (true) {
-			try {
-				sendComands();
-				updateWorld();
-			} catch (IOException e) {
-				e.printStackTrace();
-			} catch (ClassNotFoundException e) {
-				e.printStackTrace();
-			}
-
-			Graphics g = buffer.getDrawGraphics();
-
-			clrScreen(g);
-
-			camera.paint(g);
-			camera.update();
-			drawHUD(g);
-
-			if (!buffer.contentsLost())
-				buffer.show();
-		}
-	}
-
-	public void sendComands() throws IOException {
-		
-		if (keyMap.euclidean) {
-			if (keyMap.up)
-					comms.write(Comands.E_UP);
-			if (keyMap.down)
-					comms.write(Comands.E_DOWN);
-			if (keyMap.left)
-					comms.write(Comands.E_LEFT);
-			if (keyMap.right)
-					comms.write(Comands.E_RIGHT);
-		} else {
-			if (keyMap.up)
-					comms.write(Comands.V_ACELL);
-			if (keyMap.down)
-				comms.write(Comands.V_DECELL);
-			if (keyMap.left)
-					comms.write(Comands.V_CCW);
-			if (keyMap.right)
-					comms.write(Comands.V_CW);
-		}
-
-		if (keyMap.space)
-			comms.write(Comands.FIRE);
-		if (keyMap.swap)
-			comms.write(Comands.BRAINSWAP);
-		if (keyMap.escape) // TODO: This should open up some sort of menu
-			System.exit(0);
-	}
-
-	public void updateWorld() throws IOException, ClassNotFoundException {
-		World w = (World) comms.read();
-		camera.setWorld(w);
-		Player p = (Player) comms.read();
-		camera.setPlayer(p);
-
-	}
-
 }
