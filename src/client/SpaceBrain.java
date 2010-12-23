@@ -67,6 +67,7 @@ public class SpaceBrain extends JFrame {
 		this.add(ip);
 		this.pack();
 //		this.setSize(1000,800);
+		this.setSize(1210,800);
 		this.addKeyListener(keyMap);
 		
 
