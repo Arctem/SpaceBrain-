@@ -2,11 +2,10 @@ package client;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 
 import javax.swing.JPanel;
-
-import world.elements.Item;
 
 public class InventoryPanel extends JPanel {
 	/**
@@ -50,10 +49,13 @@ public class InventoryPanel extends JPanel {
 			g.drawRect(100, 230+i*60, 50, 50);
 		}
 		for(int i=0; i<camera.getPlayer().getShip().getInventory().getItemList().size();i++){
-			g.drawImage(camera.getPlayer().getShip().getInventory().getItemList().get(i).getSprite(), (i%2 == 0 ? 40:100),230+(i/2)*60,30,30,null);
+			g.setFont(new Font("Synchro LET", Font.PLAIN, 10));
+			g.drawImage(camera.getPlayer().getShip().getInventory().getItemList().get(i).getSprite(), (i%2 == 0 ? 53:113),240+(i/2)*60,25,25,null);
+			g.drawString(camera.getPlayer().getShip().getInventory().getItemList().get(i).getType().toString(), (i%2 == 0 ? 50:110), 240+(i/2)*60);
+			//TODO: Strings should decide how far over they should be drawn, for centering... I just don't care enough right now....
+			g.fillRect((i%2 == 0? 45: 105), 230+60*(i/2) + 40, (int)camera.getPlayer().getShip().getInventory().getItemList().get(i).getPower()*5, 5);
 		}
-	}
-	
+	}	
 	
 	private void clrScreen(Graphics g) {
 		g.setColor(Color.BLACK);
