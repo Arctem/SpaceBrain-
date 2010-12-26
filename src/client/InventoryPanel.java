@@ -7,8 +7,12 @@ import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.IOException;
 
 import javax.swing.JPanel;
+
+import comm.Comands;
+import comm.CommHandler;
 
 public class InventoryPanel extends JPanel {
 	/**
@@ -17,13 +21,16 @@ public class InventoryPanel extends JPanel {
 	private static final long serialVersionUID = 1L;
 	private Camera camera;
 	private int selected;
+	private CommHandler comms;
 
-	public InventoryPanel(Camera camera) {
+	public InventoryPanel(Camera camera, CommHandler comms) {
 		super(true);
 		this.setPreferredSize(new Dimension(200, 800));
 		this.setBackground(Color.BLACK);
 		this.camera = camera;
+		this.comms = comms;
 		this.addMouseMotionListener(new movement());
+		this.addMouseListener(new clicker());
 		selected = -1;
 	}
 
@@ -91,17 +98,46 @@ public class InventoryPanel extends JPanel {
 		
 		@Override
 		public void mouseMoved(MouseEvent e) {
-			selected = ((e.getY() - 230) / 60)*2;
-			if(e.getX() > 100)
-				selected ++;
-			System.out.println(selected);
+			
+			if (e.getX() > 39 && e.getX() < 151 && e.getY() > 230 && e.getY() < 530) {
+				selected = ((e.getY() - 230) / 60) * 2;
+				if (e.getX() > 100)
+					selected++;
+			}
+			else
+				selected = -1;
 		}
 	}
 	
 	private class clicker implements MouseListener {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			System.out.println(selected);
+			System.out.println("CLICKED!");
+			//DO you detected the amount of stupid that is in this code?
+			//I need to change the way comands work, but havn't dessided what rout to take
+			//I can live with this for now, but If I ever want to have locked orbitals, We 
+			//are going to have to be able to accept different types of command objects...
+			Comands comand = null;
+			switch(selected){
+			case 0: comand = Comands.DROP_ITEM_0; break;
+			case 1: comand = Comands.DROP_ITEM_1; break;
+			case 2: comand = Comands.DROP_ITEM_2; break;
+			case 3: comand = Comands.DROP_ITEM_3; break;
+			case 4: comand = Comands.DROP_ITEM_4; break;
+			case 5: comand = Comands.DROP_ITEM_5; break;
+			case 6: comand = Comands.DROP_ITEM_6; break;
+			case 7: comand = Comands.DROP_ITEM_7; break;
+			case 8: comand = Comands.DROP_ITEM_8; break;
+			case 9: comand = Comands.DROP_ITEM_9; break;
+			default: return;
+			}
+			try{
+				System.out.println(comand);
+				comms.write(comand);
+			}
+			catch(IOException err){
+				System.out.println(err);
+			}
 		}
 		@Override
 		public void mouseEntered(MouseEvent e) {}

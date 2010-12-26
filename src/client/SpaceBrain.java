@@ -61,7 +61,7 @@ public class SpaceBrain extends JFrame {
 		}
 		
 		cp = new ClientPanel(camera);
-		ip = new InventoryPanel(camera);
+		ip = new InventoryPanel(camera,comms);
 		this.setLayout(new FlowLayout());
 		this.add(cp);
 		this.add(ip);
