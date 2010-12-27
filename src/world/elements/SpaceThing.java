@@ -115,6 +115,14 @@ public abstract class SpaceThing implements Serializable {
 	public double getRadians() {
 		return vector.getRadians();
 	}
+	
+	public void setVector(Vector v){
+		vector = v;
+	}
+	
+	public void setLocation(Location l){
+		location = l;
+	}
 
 	/**
 	 * @param physList List of everything that can possibly hit things
