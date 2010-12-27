@@ -163,9 +163,10 @@ public class Ship extends SpaceThing {
 	public void dropItem(int index, World world){
 		Item i = inventory.dropItem(index);	//grab item
 		Location l = new Location(location.getxLocal()-vector.getxSpeed(),location.getyLocal()-vector.getySpeed());
-		Vector v = new Vector(vector.getxSpeed(),vector.getySpeed());
+		Vector v = new Vector(vector.getxSpeed() - vector.getxSpeed()*.5,vector.getySpeed()-vector.getySpeed()*.5);
 		i.setLocation(l);
 		i.setVector(v);
+		i.drop();
 		world.add(i);						//add to world.
 	}
 	

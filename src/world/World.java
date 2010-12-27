@@ -27,9 +27,8 @@ import comm.Comands;
  *
  */
 /**
- * @author Izzy Cecil
- * Dec 15, 2010
- *
+ * @author Izzy Cecil Dec 15, 2010
+ * 
  */
 public class World implements Serializable {
 
@@ -49,15 +48,14 @@ public class World implements Serializable {
 	 * List of all bullets in the World
 	 */
 	private ArrayList<Bullet> fireList;
-	
+
 	/**
 	 * List of all other space things in the vers.
 	 */
 	private ArrayList<SpaceThing> otherList;
 
-	
 	/**
-	 * Builds a shipList, player List, and fireList. Will also call 
+	 * Builds a shipList, player List, and fireList. Will also call
 	 * makeDebugWorld()
 	 */
 	public World() {
@@ -76,15 +74,15 @@ public class World implements Serializable {
 		shipList.add(new Ship(new Location(800, 200)));
 		shipList.add(new Ship(new Location(300, 400)));
 		shipList.add(new Ship(new Location(500, 2000)));
-		otherList.add(new Item(new Location(400,400),ItemType.SPEED,1));
+		otherList.add(new Item(new Location(400, 400), ItemType.SPEED, 1));
 		otherList.add(new Item(new Location(450, 400), ItemType.SPEED, 5));
 		otherList.add(new Item(new Location(500, 400), ItemType.SPEED, 3));
 		otherList.add(new Item(new Location(450, 450), ItemType.SHEILDS, 3));
 	}
-	
+
 	/**
-	 * Steps through physics with ALL items. Hopefully collisions will only be counted once
-	 * But double collisions most likely wont hurt.
+	 * Steps through physics with ALL items. Hopefully collisions will only be
+	 * counted once But double collisions most likely wont hurt.
 	 */
 	public void step() {
 		// Keep in mind that eventually, we won't be checking for collisions
@@ -101,25 +99,27 @@ public class World implements Serializable {
 	}
 
 	/**
-	 * @param c Command to be Executed
-	 * @param p Player using Command
+	 * @param c
+	 *            Command to be Executed
+	 * @param p
+	 *            Player using Command
 	 */
 	public void playerCommand(Comands c, Player p) {
 		switch (c) {
 		case E_UP:
-			p.getShip().accelY(-1.0*p.getShip().getThrusters());
+			p.getShip().accelY(-1.0 * p.getShip().getThrusters());
 			break;
 		case E_DOWN:
 			p.getShip().accelY(p.getShip().getThrusters());
 			break;
 		case E_LEFT:
-			p.getShip().accelX(-1.0*p.getShip().getThrusters());
+			p.getShip().accelX(-1.0 * p.getShip().getThrusters());
 			break;
 		case E_RIGHT:
 			p.getShip().accelX(p.getShip().getThrusters());
 			break;
 		case V_ACELL:
-			p.getShip().accelerate(-1.0*p.getShip().getThrusters());
+			p.getShip().accelerate(-1.0 * p.getShip().getThrusters());
 			break;
 		case V_DECELL:
 			p.getShip().accelerate(p.getShip().getThrusters());
@@ -136,16 +136,50 @@ public class World implements Serializable {
 		case BRAINSWAP:
 			if (p.getShip().brainSwap())
 				brainSwap();
-			break;			
+			break;
+		case DROP_ITEM_0:
+			p.getShip().dropItem(0, this);
+			break;
+		case DROP_ITEM_1:
+			p.getShip().dropItem(1, this);
+			break;
+		case DROP_ITEM_2:
+			p.getShip().dropItem(2, this);
+			break;
+		case DROP_ITEM_3:
+			p.getShip().dropItem(3, this);
+			break;
+		case DROP_ITEM_4:
+			p.getShip().dropItem(4, this);
+			break;
+		case DROP_ITEM_5:
+			p.getShip().dropItem(5, this);
+			break;
+		case DROP_ITEM_6:
+			p.getShip().dropItem(6, this);
+			break;
+		case DROP_ITEM_7:
+			p.getShip().dropItem(7, this);
+			break;
+		case DROP_ITEM_8:
+			p.getShip().dropItem(8, this);
+			break;
+		case DROP_ITEM_9:
+			p.getShip().dropItem(9, this);
+			break;
 		default:
 			System.out.println("Bake sale! Unrecognized command "
 					+ c.toString());
 		}
 	}
+
 	/**
-	 * @param g Graphics to draw with
-	 * @param originX of the Camera
-	 * @param originY of the Camera
+	 * @param g
+	 *            Graphics to draw with
+	 * @param originX
+	 *            of the Camera
+	 * @param originY
+	 *            of the Camera
 	 */
 	public void paint(Graphics g, double originX, double originY) {
 		// Later on, we may not want to be drawing everything on the map.
@@ -153,11 +187,11 @@ public class World implements Serializable {
 		for (SpaceThing thing : everything)
 			thing.paint(g, originX, originY);
 	}
-	
+
 	/**
-	 * Builds a ship, and places it in the world at the default local.
-	 * Then builds a player, using that ship. Both are added into the world
-	 * list.
+	 * Builds a ship, and places it in the world at the default local. Then
+	 * builds a player, using that ship. Both are added into the world list.
+	 * 
 	 * @return The new Player
 	 */
 	public Player newPlayer() {
@@ -168,6 +202,7 @@ public class World implements Serializable {
 		shipList.add(s);
 		return p;
 	}
+
 	/**
 	 * @param p
 	 * @return If the player is currently in the world
@@ -175,6 +210,7 @@ public class World implements Serializable {
 	public boolean playerExist(Player p) {
 		return players.contains(p);
 	}
+
 	/**
 	 * @return A list of ALL SpaceThings in the World
 	 */
@@ -185,18 +221,24 @@ public class World implements Serializable {
 		everything.addAll(otherList);
 		return everything;
 	}
+
 	/**
-	 * @param thing SpaceThing to add to world
-	 * Will add any Space thing into the appropriate ArrayList
+	 * @param thing
+	 *            SpaceThing to add to world Will add any Space thing into the
+	 *            appropriate ArrayList
 	 */
 	public void add(SpaceThing thing) {
 		if (thing instanceof Ship)
 			shipList.add((Ship) thing);
 		if (thing instanceof Bullet)
 			fireList.add((Bullet) thing);
+		if (thing instanceof Item)
+			otherList.add(thing);
 	}
+
 	/**
-	 * @param index Of Player
+	 * @param index
+	 *            Of Player
 	 * @return Player with given index number.
 	 */
 	public Player getPlayer(int index) {
@@ -204,15 +246,17 @@ public class World implements Serializable {
 	}
 
 	/**
-	 * @param index index of Ship
+	 * @param index
+	 *            index of Ship
 	 * @return Ship with given Index
 	 */
 	public Ship getShip(int index) {
 		return shipList.get(index);
 	}
+
 	/**
-	 * @param thing To be Removed
-	 * Will remove any SpaceThing from the world
+	 * @param thing
+	 *            To be Removed Will remove any SpaceThing from the world
 	 */
 	public void remove(SpaceThing thing) {
 		if (thing instanceof Ship)
@@ -224,38 +268,44 @@ public class World implements Serializable {
 	}
 
 	/**
-	 * @param player To be Removed
-	 * Will remove any player in the world.
+	 * @param player
+	 *            To be Removed Will remove any player in the world.
 	 */
 	public void removePlayer(int player) {
 		players.remove(player);
 	}
 
 	/**
-	 * @param player to be removed
+	 * @param player
+	 *            to be removed
 	 */
 	public void removePlayer(Player player) {
 		shipList.remove(player);
 	}
 
 	/**
-	 * @param index of Ship to be removed
+	 * @param index
+	 *            of Ship to be removed
 	 */
 	public void removeShip(int index) {
 		shipList.remove(index);
 	}
 
 	/**
-	 * @param ship to be removed
+	 * @param ship
+	 *            to be removed
 	 */
 	public void removeShip(Ship ship) {
 		shipList.remove(ship);
 	}
+
 	private void brainSwap() {
 
 	}
-	
-	public boolean canSwap(){return false;}
+
+	public boolean canSwap() {
+		return false;
+	}
 
 	@Override
 	public String toString() {

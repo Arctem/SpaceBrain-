@@ -96,6 +96,10 @@ public class Item extends SpaceThing {
 	public ItemType getType() {
 		return type;
 	}
+	
+	public void drop(){
+		pickedUp = false;
+	}
 
 	public void setType(ItemType type) {
 		this.type = type;

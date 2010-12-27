@@ -112,7 +112,6 @@ public class InventoryPanel extends JPanel {
 	private class clicker implements MouseListener {
 		@Override
 		public void mouseClicked(MouseEvent e) {
-			System.out.println("CLICKED!");
 			//DO you detected the amount of stupid that is in this code?
 			//I need to change the way comands work, but havn't dessided what rout to take
 			//I can live with this for now, but If I ever want to have locked orbitals, We 
@@ -132,7 +131,6 @@ public class InventoryPanel extends JPanel {
 			default: return;
 			}
 			try{
-				System.out.println(comand);
 				comms.write(comand);
 			}
 			catch(IOException err){
