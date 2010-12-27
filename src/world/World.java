@@ -136,7 +136,7 @@ public class World implements Serializable {
 		case BRAINSWAP:
 			if (p.getShip().brainSwap())
 				brainSwap();
-			break;
+			break;			
 		default:
 			System.out.println("Bake sale! Unrecognized command "
 					+ c.toString());

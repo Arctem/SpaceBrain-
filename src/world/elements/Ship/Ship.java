@@ -5,12 +5,14 @@ import java.awt.Graphics;
 import java.awt.Polygon;
 import java.util.ArrayList;
 
+import world.World;
 import world.elements.Bullet;
 import world.elements.Item;
 import world.elements.SpaceThing;
 import world.elements.Weapon;
 import world.elements.libs.ImageType;
 import world.elements.physics.Location;
+import world.elements.physics.Vector;
 
 /**
  * @author Izzy Cecil 
@@ -157,6 +159,16 @@ public class Ship extends SpaceThing {
 	public void pickupItem(Item i){
 		inventory.addItem(i);
 	}
+	
+	public void dropItem(int index, World world){
+		Item i = inventory.dropItem(index);	//grab item
+		Location l = new Location(location.getxLocal()-vector.getxSpeed(),location.getyLocal()-vector.getySpeed());
+		Vector v = new Vector(vector.getxSpeed(),vector.getySpeed());
+		i.setLocation(l);
+		i.setVector(v);
+		world.add(i);						//add to world.
+	}
+	
 	
 	//TODO: Eventually this needs to eject the old weapon.
 	public void pickupWeapon(Weapon w){

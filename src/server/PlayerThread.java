@@ -39,7 +39,7 @@ public class PlayerThread extends Thread {
 	/**
 	 * @param socket New Accepted Socket to be bound to player
 	 * @param player New Player to be bound to socket
-	 * @throws IOException In the case of comunication error.
+	 * @throws IOException In the case of communication error.
 	 * Builds new PlayerThread object.
 	 */
 	public PlayerThread(Socket socket, Player player) throws IOException {
@@ -50,7 +50,7 @@ public class PlayerThread extends Thread {
 	
 	/**
 	 * @see java.lang.Thread#run()
-	 * Main read loop. Waits for comand to be sent, then
+	 * Main read loop. Waits for command to be sent, then
 	 * adds it to the Stack.
 	 * 
 	 * TODO: Currently has now "End" Condition. This should be
@@ -98,7 +98,7 @@ public class PlayerThread extends Thread {
 	/**
 	 * @param world Update version of the World.
 	 * @throws IOException In case of STRANGE communication error
-	 * Sends first the world, then the Player to the Client. The client listend for these
+	 * Sends first the world, then the Player to the Client. The client listen for these
 	 * two packages in that order.
 	 * The updated world will inform the client where all object are physically in the world, and there
 	 * Statistics. The Player will tell the client any changes to health, position, or any new features

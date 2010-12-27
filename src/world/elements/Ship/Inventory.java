@@ -49,6 +49,11 @@ public class Inventory implements Serializable{
 	public ArrayList<Item> getItemList() {
 		return itemList;
 	}
+	
+	public Item dropItem(int i){
+		return itemList.remove(i);
+	}
+	
 
 	public Weapon getWeapon() {
 		return weapon;
